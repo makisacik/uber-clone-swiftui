@@ -14,8 +14,11 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             LocationSearchActivationView()
-                .padding(.top, 30)
+                .padding(.top, 70)
             
+            MapViewActionButton()
+                .padding(.leading)
+                .padding(.top, 4)
         }
     }
 }
