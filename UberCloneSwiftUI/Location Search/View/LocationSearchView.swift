@@ -25,7 +25,6 @@ struct LocationSearchView: View {
                         .fill(Color(.systemGray))
                         .frame(width: 6, height: 6)
                 }
-                
                 VStack {
                     TextField("Current Location", text: $startLocationText)
                         .frame(height: 32)
@@ -35,9 +34,19 @@ struct LocationSearchView: View {
                         .frame(height: 32)
                         .background(Color(.systemGray4))
                 }
-                
             }
             .padding(.horizontal)
+            .padding(.top, 64)
+            
+            Divider()
+                .padding(.vertical)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    ForEach(0..<20) { _ in
+                        LocationSearchResultCell()
+                    }
+                }
+            }
             
         }
     }
