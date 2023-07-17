@@ -48,7 +48,7 @@ struct LocationSearchView: View {
                 }
             }
             
-        }
+        }.background(Color(.systemBackground))
     }
 }
 
