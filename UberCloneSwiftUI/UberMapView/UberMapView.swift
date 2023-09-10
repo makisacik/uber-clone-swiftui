@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct UberMapView: UIViewRepresentable {
+    
     typealias UIViewType = MKMapView
     let mapView = MKMapView()
     let locationManager = LocationManager()
