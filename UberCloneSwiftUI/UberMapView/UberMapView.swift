@@ -13,7 +13,8 @@ struct UberMapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     let mapView = MKMapView()
     let locationManager = LocationManager()
-    
+    @EnvironmentObject var locationViewModel: LocationSearchViewModel
+
     func makeUIView(context: Context) -> MKMapView {
         mapView.delegate = context.coordinator
         mapView.isRotateEnabled = false
@@ -24,7 +25,9 @@ struct UberMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        
+        if let coordinate = locationViewModel.selectedLocationCoordinate {
+            context.coordinator.addAndSelectAnnotation(with: coordinate)
+        }
     }
     
     func makeCoordinator() -> MapCoordinator {
@@ -47,5 +50,16 @@ extension UberMapView {
             
             parent.mapView.setRegion(region, animated: true)
         }
+        
+        func addAndSelectAnnotation(with coordinate: CLLocationCoordinate2D) {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            parent.mapView.removeAnnotations(parent.mapView.annotations)
+            parent.mapView.addAnnotation(annotation)
+            parent.mapView.selectAnnotation(annotation, animated: true)
+            
+            parent.mapView.showAnnotations(parent.mapView.annotations, animated: true)
+        }
+        
     }
 }
