@@ -59,6 +59,13 @@ extension UberMapView {
             }
         }
         
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let polyline = MKPolylineRenderer(overlay: overlay)
+            polyline.strokeColor = .systemBlue
+            polyline.lineWidth = 6
+            return polyline
+        }
+        
         func addAndSelectAnnotation(with coordinate: CLLocationCoordinate2D) {
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
