@@ -9,6 +9,7 @@ import CoreLocation
 
 final class LocationManager: NSObject, ObservableObject {
     private let locationManager = CLLocationManager()
+    var isFirstLocationSet = false
     
     override init() {
         super.init() 
