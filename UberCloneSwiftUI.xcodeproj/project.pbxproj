@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32A4AA4F2AC58DE700173479 /* UberMapViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A4AA4E2AC58DE700173479 /* UberMapViewState.swift */; };
 		32BC77CA2A607E03008FA573 /* UberCloneSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BC77C92A607E03008FA573 /* UberCloneSwiftUIApp.swift */; };
 		32BC77CE2A607E03008FA573 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32BC77CD2A607E03008FA573 /* Assets.xcassets */; };
 		32BC77D12A607E03008FA573 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32BC77D02A607E03008FA573 /* Preview Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32A4AA4E2AC58DE700173479 /* UberMapViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UberMapViewState.swift; sourceTree = "<group>"; };
 		32BC77C62A607E02008FA573 /* UberCloneSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberCloneSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32BC77C92A607E03008FA573 /* UberCloneSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UberCloneSwiftUIApp.swift; sourceTree = "<group>"; };
 		32BC77CD2A607E03008FA573 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32A4AA502AC58E9900173479 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				32A4AA4E2AC58DE700173479 /* UberMapViewState.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		32BC77BD2A607E02008FA573 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				32BC77DB2A60805B008FA573 /* UberMapView.swift */,
+				32A4AA502AC58E9900173479 /* Model */,
 			);
 			path = UberMapView;
 			sourceTree = "<group>";
@@ -239,6 +250,7 @@
 				32BC77DC2A60805B008FA573 /* UberMapView.swift in Sources */,
 				32BC77CA2A607E03008FA573 /* UberCloneSwiftUIApp.swift in Sources */,
 				32BC77D82A607F3F008FA573 /* HomeView.swift in Sources */,
+				32A4AA4F2AC58DE700173479 /* UberMapViewState.swift in Sources */,
 				32BC77E32A60ABA6008FA573 /* LocationSearchActivationView.swift in Sources */,
 				32BC77ED2A60B98C008FA573 /* LocationSearchResultCell.swift in Sources */,
 			);

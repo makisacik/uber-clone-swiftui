@@ -12,6 +12,7 @@ struct UberMapView: UIViewRepresentable {
     
     typealias UIViewType = MKMapView
     let mapView = MKMapView()
+    @Binding var mapState: UberMapViewState
     let locationManager = LocationManager()
     
     @EnvironmentObject var locationViewModel: LocationSearchViewModel
@@ -25,6 +26,7 @@ struct UberMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        print("update map state \(mapState)")
         if let coordinate = locationViewModel.selectedLocationCoordinate {
             context.coordinator.addAndSelectAnnotation(with: coordinate)
             context.coordinator.configurePolyline(with: coordinate)
@@ -60,6 +62,7 @@ extension UberMapView {
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            parent.mapView.removeOverlays(parent.mapView.overlays)
             let polyline = MKPolylineRenderer(overlay: overlay)
             polyline.strokeColor = .systemBlue
             polyline.lineWidth = 6
