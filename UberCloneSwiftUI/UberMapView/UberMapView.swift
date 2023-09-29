@@ -12,6 +12,7 @@ struct UberMapView: UIViewRepresentable {
     
     typealias UIViewType = MKMapView
     let mapView = MKMapView()
+    @Binding var mapState: UberMapViewState
     let locationManager = LocationManager()
     
     @EnvironmentObject var locationViewModel: LocationSearchViewModel
@@ -25,9 +26,17 @@ struct UberMapView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        if let coordinate = locationViewModel.selectedLocationCoordinate {
-            context.coordinator.addAndSelectAnnotation(with: coordinate)
-            context.coordinator.configurePolyline(with: coordinate)
+        print("update map state \(mapState)")
+        switch mapState {
+        case .noInput:
+            context.coordinator.clearMapViewPolylineAndSetRegion()
+        case .searchingForLocation:
+            break
+        case .locationSelected:
+            if let coordinate = locationViewModel.selectedLocationCoordinate {
+                context.coordinator.addAndSelectAnnotation(with: coordinate)
+                context.coordinator.configurePolyline(with: coordinate)
+            }
         }
     }
     
@@ -41,6 +50,7 @@ extension UberMapView {
     class MapCoordinator: NSObject, MKMapViewDelegate {
         let parent: UberMapView
         var userLocationCoordinate: CLLocationCoordinate2D?
+        var currentRegion: MKCoordinateRegion?
         var isFirstLocationSet = false
         
         init(parent: UberMapView) {
@@ -54,6 +64,7 @@ extension UberMapView {
             
             if !isFirstLocationSet {
                 let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+                self.currentRegion = region
                 parent.mapView.setRegion(region, animated: true)
                 isFirstLocationSet = true
             }
@@ -105,5 +116,14 @@ extension UberMapView {
             }
         }
         
+        func clearMapViewPolylineAndSetRegion() {
+            parent.mapView.removeOverlays(parent.mapView.overlays)
+            parent.mapView.removeAnnotations(parent.mapView.annotations)
+
+            
+            if let currentRegion {
+                parent.mapView.setRegion(currentRegion, animated: true)
+            }
+        }
     }
 }

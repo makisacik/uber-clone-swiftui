@@ -28,10 +28,11 @@ final class LocationSearchViewModel: NSObject, ObservableObject {
         searchCompleter.queryFragment = queryFragment
     }
     
-    func selectLocation(searchCompletion: MKLocalSearchCompletion) {
+    func selectLocation(searchCompletion: MKLocalSearchCompletion, completionHandler: @escaping () -> Void) {
         getLocationCoordinates(searchCompletion: searchCompletion) { coordinate in
             if let coordinate {
                 self.selectedLocationCoordinate = coordinate
+                completionHandler()
             }
         }
     }

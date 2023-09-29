@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationSearchView: View {
     @State private var startLocationText = ""
-    @Binding var showLocationSearchView: Bool
+    @Binding var mapState: UberMapViewState
     @EnvironmentObject var viewModel: LocationSearchViewModel
     
     var body: some View {
@@ -46,8 +46,9 @@ struct LocationSearchView: View {
                     ForEach(viewModel.results, id: \.self) { result in
                         LocationSearchResultCell(title: result.title, subTitle: result.subtitle)
                             .onTapGesture {
-                                viewModel.selectLocation(searchCompletion: result)
-                                showLocationSearchView.toggle()
+                                viewModel.selectLocation(searchCompletion: result) {
+                                    self.mapState = .locationSelected
+                                }
                             }
                     }
                 }
@@ -59,6 +60,6 @@ struct LocationSearchView: View {
 
 struct LocationSearchView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationSearchView(showLocationSearchView: .constant(true))
+        LocationSearchView(mapState: .constant(.searchingForLocation))
     }
 }
