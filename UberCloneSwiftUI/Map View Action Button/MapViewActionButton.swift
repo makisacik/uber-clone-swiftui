@@ -32,11 +32,9 @@ struct MapViewActionButton: View {
         switch mapState {
         case .noInput:
             print("no input")
-        case .searchingForLocation:
+        case .searchingForLocation, .locationSelected:
             mapState = .noInput
-        case .locationSelected:
-            print("clear map view")
-        }
+        } 
     }
     
     func imageForState(_ state: UberMapViewState) -> Image {
