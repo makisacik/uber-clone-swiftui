@@ -155,6 +155,7 @@ struct RideRequestView: View {
 
         }
         .background(Color(.background))
+        .cornerRadius(30)
     }
 }
 
