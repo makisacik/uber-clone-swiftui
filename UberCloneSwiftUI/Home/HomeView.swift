@@ -14,7 +14,6 @@ struct HomeView: View {
         ZStack(alignment: .top) {
             UberMapView(mapState: $mapState )
                 .ignoresSafeArea()
-            
             if mapState == .noInput {
                 LocationSearchActivationView()
                     .padding(.top, 70)
