@@ -84,13 +84,15 @@ extension UberMapView {
             parent.mapView.addAnnotation(annotation)
             parent.mapView.selectAnnotation(annotation, animated: true)
             
-            parent.mapView.showAnnotations(parent.mapView.annotations, animated: true)
+            //parent.mapView.showAnnotations(parent.mapView.annotations, animated: true)
         }
         
         func configurePolyline(with destinationCoordinate: CLLocationCoordinate2D) {
             guard let userLocationCoordinate = userLocationCoordinate else { return }
             getDestinationRoute(from: userLocationCoordinate, to: destinationCoordinate) { route in
                 self.parent.mapView.addOverlay(route.polyline)
+                let rect = self.parent.mapView.mapRectThatFits(route.polyline.boundingMapRect, edgePadding: .init(top: 64, left: 32, bottom: 520, right: 32))
+                self.parent.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
             }
         }
         
@@ -119,11 +121,11 @@ extension UberMapView {
         func clearMapViewPolylineAndSetRegion() {
             parent.mapView.removeOverlays(parent.mapView.overlays)
             parent.mapView.removeAnnotations(parent.mapView.annotations)
-
-            
             if let currentRegion {
                 parent.mapView.setRegion(currentRegion, animated: true)
             }
         }
+        
+        
     }
 }

@@ -17,6 +17,7 @@ struct RideRequestView: View {
             Capsule()
                 .foregroundColor(Color(.secondaryBackground))
                 .frame(width: 48, height: 6)
+                .padding(8)
             HStack {
                 VStack {
                     Circle()
@@ -148,14 +149,16 @@ struct RideRequestView: View {
                 .fontWeight(.semibold)
                 Spacer()
             }
-            .frame(height: 50)
+            .frame(height: 40)
             .background(Color.blue)
             .cornerRadius(10)
             .padding(.horizontal, 5)
 
         }
+        .padding(.bottom, 50)
         .background(Color(.background))
         .cornerRadius(30)
+
     }
 }
 
