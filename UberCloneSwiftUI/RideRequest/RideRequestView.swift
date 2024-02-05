@@ -59,62 +59,35 @@ struct RideRequestView: View {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
             
+            
             ScrollView(.horizontal) {
                 HStack(spacing: 12) {
-                    VStack(alignment: .center) {
-                        Image(.uberXIcon)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        Spacer()
-                        Text("UberX")
-                            .fontWeight(.semibold)
-                        TextField("Value", text: $uberXPrice)
-                            .multilineTextAlignment(.center)
-                            .fontWeight(.semibold)
-                        Spacer()
-                    }
-                    .background(Color(.secondaryBackground))
-                    .cornerRadius(10)
-                    .frame(width: 112)
-                    
-                    VStack {
-                        Image("UberBlack")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        Spacer()
-                        Text("Uber Black")
-                            .fontWeight(.semibold)
-                        TextField("Value", text: $uberBlackPrice)
-                            .multilineTextAlignment(.center)
-                            .fontWeight(.semibold)
-                        Spacer()
-                    }
-                    .background(Color(.secondaryBackground))
-                    .cornerRadius(10)
-                    .frame(width: 112)
+                    ForEach(RideType.allCases) {rideType in
+                        VStack(alignment: .center) {
 
-                    VStack {
-                        Image("UberXIcon")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .scaleEffect(1.3)
-                        
-                        Spacer()
-                        Text("UberXL")
-                            .fontWeight(.semibold)
-                        
-                        TextField("Value", text: $uberXLPrice)
-                            .multilineTextAlignment(.center)
-                            .fontWeight(.semibold)
-                        
-                        Spacer()
+                            if (rideType == .uberXL) {
+                                Image(rideType.imageName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .scaleEffect(1.25)
+                            } else {
+                                Image(rideType.imageName)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            }
+                            
+                            Text(rideType.description)
+                                .fontWeight(.semibold)
+                            TextField("Value", text: $uberXPrice)
+                                .multilineTextAlignment(.center)
+                                .fontWeight(.semibold)
+                            Spacer()
+                        }
+                        .background(Color(.secondaryBackground))
+                        .cornerRadius(10)
+                        .frame(width: 112)
                     }
-                    .background(Color(.secondaryBackground))
-                    .cornerRadius(10)
-                    .frame(width: 112)
-                    
                 }
-                
             }.frame(height: 140)
                 .padding(.horizontal)
             
