@@ -9,12 +9,15 @@ import SwiftUI
 
 struct RideRequestView: View {
     @Binding var uberXPrice: String
-    
+    @Binding var uberBlackPrice: String
+    @Binding var uberXLPrice: String
+
     var body: some View {
         VStack {
             Capsule()
                 .foregroundColor(Color(.secondaryBackground))
                 .frame(width: 48, height: 6)
+                .padding(8)
             HStack {
                 VStack {
                     Circle()
@@ -30,13 +33,20 @@ struct RideRequestView: View {
                 
                 VStack(alignment: .leading, spacing: 24) {
                     Text("Current Location")
+                        .foregroundStyle(.gray)
+                        .fontWeight(.semibold)
                     Text("Where to ?")
+                        .fontWeight(.semibold)
                 }
                 
                 Spacer()
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .trailing, spacing: 24) {
                     Text("2:13 PM")
+                        .foregroundStyle(.gray)
+                        .fontWeight(.semibold)
                     Text("3:02 PM")
+                        .foregroundStyle(.gray)
+                        .fontWeight(.semibold)
                 }.padding()
                 
             }
@@ -49,51 +59,64 @@ struct RideRequestView: View {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack {
-                VStack {
+            ScrollView(.horizontal) {
+                HStack(spacing: 12) {
+                    VStack(alignment: .center) {
+                        Image(.uberXIcon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        Spacer()
+                        Text("UberX")
+                            .fontWeight(.semibold)
+                        TextField("Value", text: $uberXPrice)
+                            .multilineTextAlignment(.center)
+                            .fontWeight(.semibold)
+                        Spacer()
+                    }
+                    .background(Color(.secondaryBackground))
+                    .cornerRadius(10)
+                    .frame(width: 112)
                     
-                    Image(.uberXIcon)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    Text("UberX")
-                    TextField("Value", text: $uberXPrice)
-                        .multilineTextAlignment(.center)
-                    Spacer()
+                    VStack {
+                        Image("UberBlack")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        Spacer()
+                        Text("Uber Black")
+                            .fontWeight(.semibold)
+                        TextField("Value", text: $uberBlackPrice)
+                            .multilineTextAlignment(.center)
+                            .fontWeight(.semibold)
+                        Spacer()
+                    }
+                    .background(Color(.secondaryBackground))
+                    .cornerRadius(10)
+                    .frame(width: 112)
+
+                    VStack {
+                        Image("UberXIcon")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .scaleEffect(1.3)
+                        
+                        Spacer()
+                        Text("UberXL")
+                            .fontWeight(.semibold)
+                        
+                        TextField("Value", text: $uberXLPrice)
+                            .multilineTextAlignment(.center)
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                    }
+                    .background(Color(.secondaryBackground))
+                    .cornerRadius(10)
+                    .frame(width: 112)
+                    
                 }
-                .background(Color(.secondaryBackground))
-                .cornerRadius(10)
-                .padding(.horizontal, 5)
-                
-                VStack {
-                    Image("UberBlack")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    Text("Uber Black")
-                    TextField("Value", text: $uberXPrice)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                .background(Color(.secondaryBackground))
-                .cornerRadius(10)
-                .padding(.horizontal, 5)
-                
-                VStack {
-                    Image("UberXIcon")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .scaleEffect(1.3)
-                    Spacer()
-                    Text("UberXL")
-                    TextField("Value", text: $uberXPrice)
-                        .multilineTextAlignment(.center)
-                    Spacer()
-                }
-                .background(Color(.secondaryBackground))
-                .cornerRadius(10)
-                .padding(.horizontal, 5)
                 
             }.frame(height: 140)
-                .padding(.horizontal, 7 )
+                .padding(.horizontal)
             
             Divider()
                 .padding(.vertical, 8)
@@ -104,6 +127,7 @@ struct RideRequestView: View {
                     .background(Color.blue)
                     .cornerRadius(5)
                     .padding()
+                    .fontWeight(.semibold)
                 
                 Text("****1234")
                     .font(.bold(.body)())
@@ -121,21 +145,25 @@ struct RideRequestView: View {
                 Button("CONFIRM RIDE") {
                     
                 }
-                .foregroundColor(Color.primary)
+                .foregroundStyle(.primary)
+                .fontWeight(.semibold)
                 Spacer()
             }
-            .frame(height: 50)
+            .frame(height: 40)
             .background(Color.blue)
             .cornerRadius(10)
             .padding(.horizontal, 5)
 
         }
+        .padding(.bottom, 50)
         .background(Color(.background))
+        .cornerRadius(30)
+
     }
 }
 
 struct RideRequestView_Previews: PreviewProvider {
     static var previews: some View {
-        RideRequestView(uberXPrice: .constant("$22.3"))
+        RideRequestView(uberXPrice: .constant("$22.4"), uberBlackPrice: .constant("$26.3"), uberXLPrice: .constant("$30.5"))
     }
 }
