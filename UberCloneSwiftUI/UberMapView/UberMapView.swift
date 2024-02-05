@@ -84,7 +84,6 @@ extension UberMapView {
             parent.mapView.addAnnotation(annotation)
             parent.mapView.selectAnnotation(annotation, animated: true)
             
-            //parent.mapView.showAnnotations(parent.mapView.annotations, animated: true)
         }
         
         func configurePolyline(with destinationCoordinate: CLLocationCoordinate2D) {
