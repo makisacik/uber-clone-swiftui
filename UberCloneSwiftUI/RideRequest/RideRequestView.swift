@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct RideRequestView: View {
+    
+    @State private var selectedRideType: RideType = .uberX
+    
     @Binding var uberXPrice: String
     @Binding var uberBlackPrice: String
     @Binding var uberXLPrice: String
@@ -83,9 +86,14 @@ struct RideRequestView: View {
                                 .fontWeight(.semibold)
                             Spacer()
                         }
-                        .background(Color(.secondaryBackground))
+                        .background(Color(rideType == selectedRideType ? .systemBlue : .secondarySystemBackground))
                         .cornerRadius(10)
                         .frame(width: 112)
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                selectedRideType = rideType
+                            }
+                        }
                     }
                 }
             }.frame(height: 140)
