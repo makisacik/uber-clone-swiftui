@@ -65,33 +65,34 @@ struct RideRequestView: View {
             
             ScrollView(.horizontal) {
                 HStack(spacing: 12) {
-                    ForEach(RideType.allCases) {rideType in
+                    ForEach(RideType.allCases) {type in
                         VStack(alignment: .center) {
 
-                            if (rideType == .uberXL) {
-                                Image(rideType.imageName)
+                            if (type == .uberXL) {
+                                Image(type.imageName)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .scaleEffect(1.25)
                             } else {
-                                Image(rideType.imageName)
+                                Image(type.imageName)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                             }
                             
-                            Text(rideType.description)
+                            Text(type.description)
                                 .fontWeight(.semibold)
                             TextField("Value", text: $uberXPrice)
                                 .multilineTextAlignment(.center)
                                 .fontWeight(.semibold)
                             Spacer()
                         }
-                        .background(getRideTypeSelectedColor(rideType: rideType))
-                        .cornerRadius(10)
                         .frame(width: 112)
+                        .background(getRideTypeSelectedColor(type: type))
+                        .scaleEffect(getRideTypeSelectedScale(type: type))
+                        .cornerRadius(10)
                         .onTapGesture {
                             withAnimation(.spring()) {
-                                selectedRideType = rideType
+                                selectedRideType = type
                             }
                         }
                     }
@@ -142,8 +143,12 @@ struct RideRequestView: View {
 
     }
     
-    func getRideTypeSelectedColor(rideType: RideType) -> Color {
-        return Color(rideType == selectedRideType ? .systemBlue : .secondarySystemBackground)
+    func getRideTypeSelectedColor(type: RideType) -> Color {
+        return type == selectedRideType ? Color(.systemBlue) : Color(.secondaryBackground)
+    }
+    
+    func getRideTypeSelectedScale(type: RideType) -> Double {
+        return type == selectedRideType ? 1.1 : 1.0
     }
     
 }
