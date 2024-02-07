@@ -86,7 +86,7 @@ struct RideRequestView: View {
                                 .fontWeight(.semibold)
                             Spacer()
                         }
-                        .background(Color(rideType == selectedRideType ? .systemBlue : .secondarySystemBackground))
+                        .background(getRideTypeSelectedColor(rideType: rideType))
                         .cornerRadius(10)
                         .frame(width: 112)
                         .onTapGesture {
@@ -141,6 +141,11 @@ struct RideRequestView: View {
         .cornerRadius(30)
 
     }
+    
+    func getRideTypeSelectedColor(rideType: RideType) -> Color {
+        return Color(rideType == selectedRideType ? .systemBlue : .secondarySystemBackground)
+    }
+    
 }
 
 struct RideRequestView_Previews: PreviewProvider {
