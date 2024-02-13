@@ -11,6 +11,7 @@ struct RideRequestView: View {
     
     @State private var selectedRideType: RideType = .uberX
     @EnvironmentObject var locationViewModel: LocationSearchViewModel
+    
     var body: some View {
         VStack {
             Capsule()
@@ -40,10 +41,10 @@ struct RideRequestView: View {
                 
                 Spacer()
                 VStack(alignment: .trailing, spacing: 24) {
-                    Text("2:13 PM")
+                    Text(locationViewModel.pickupTime ?? "")
                         .foregroundStyle(.gray)
                         .fontWeight(.semibold)
-                    Text("3:02 PM")
+                    Text(locationViewModel.dropoffTime ?? "")
                         .foregroundStyle(.gray)
                         .fontWeight(.semibold)
                 }.padding()
