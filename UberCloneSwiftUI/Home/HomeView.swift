@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var mapState = UberMapViewState.noInput
-     
+    @EnvironmentObject var viewModel: LocationSearchViewModel
+    
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -35,11 +36,16 @@ struct HomeView: View {
             
 
             if mapState == .locationSelected {
-                RideRequestView(uberXPrice: .constant("$22.3"), uberBlackPrice: .constant("$24.2"), uberXLPrice: .constant("$30.5"))
+                RideRequestView()
                     .transition(.move(edge: .bottom))
             }
             
         }.ignoresSafeArea(edges: .bottom)
+        .onReceive(LocationManager.shared.$userLocation,
+                   perform: { location in
+            debugPrint("DEBUG Location \(String(describing: location))")
+            viewModel.userLocation = location
+        })
     }
 }
 
