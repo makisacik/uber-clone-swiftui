@@ -11,4 +11,5 @@ enum UberMapViewState {
     case noInput
     case searchingForLocation 
     case locationSelected
+    case polylineAdded
 }

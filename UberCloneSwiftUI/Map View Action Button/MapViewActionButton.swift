@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MapViewActionButton: View {
     @Binding var mapState: UberMapViewState
+    @EnvironmentObject var viewModel: LocationSearchViewModel
     
     var body: some View {
         Button {
@@ -32,9 +33,13 @@ struct MapViewActionButton: View {
         switch mapState {
         case .noInput:
             print("no input")
-        case .searchingForLocation, .locationSelected:
+        case .searchingForLocation:
             mapState = .noInput
-        } 
+        case .locationSelected, .polylineAdded:
+            mapState = .noInput
+            viewModel.selectedUberLocation = nil
+
+        }
     }
     
     func imageForState(_ state: UberMapViewState) -> Image {
@@ -43,6 +48,8 @@ struct MapViewActionButton: View {
             return Image(systemName: "line.3.horizontal")
         case .searchingForLocation, .locationSelected:
             return Image(systemName: "arrow.left")
+        default:
+            return Image(systemName: "line.3.horizontal")
         }
     }
     
