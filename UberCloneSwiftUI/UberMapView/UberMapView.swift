@@ -37,6 +37,8 @@ struct UberMapView: UIViewRepresentable {
                 context.coordinator.addAndSelectAnnotation(with: uberLocation.coordinate)
                 context.coordinator.configurePolyline(with: uberLocation.coordinate)
             }
+        case .polylineAdded:
+            break
         }
     }
     
@@ -90,6 +92,8 @@ extension UberMapView {
             guard let userLocationCoordinate = userLocationCoordinate else { return }
             parent.locationViewModel.getDestinationRoute(from: userLocationCoordinate, to: destinationCoordinate) { route in
                 self.parent.mapView.addOverlay(route.polyline)
+                self.parent.mapState = .polylineAdded
+                
                 let rect = self.parent.mapView.mapRectThatFits(route.polyline.boundingMapRect, edgePadding: .init(top: 64, left: 32, bottom: 520, right: 32))
                 self.parent.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
             }
