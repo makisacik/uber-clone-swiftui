@@ -34,7 +34,7 @@ struct RideRequestView: View {
                     Text("Current Location")
                         .foregroundStyle(.gray)
                         .fontWeight(.semibold)
-                    Text("Where to ?")
+                    Text(locationViewModel.selectedUberLocation?.title ?? "Selected location")
                         .fontWeight(.semibold)
                 }
                 

@@ -10,7 +10,7 @@ import MapKit
 
 final class LocationSearchViewModel: NSObject, ObservableObject {
     @Published var results = [MKLocalSearchCompletion]()
-    @Published var selectedLocationCoordinate: CLLocationCoordinate2D?
+    @Published var selectedUberLocation: UberLocation?
     
     var userLocation: CLLocationCoordinate2D?
     
@@ -34,7 +34,7 @@ final class LocationSearchViewModel: NSObject, ObservableObject {
     func selectLocation(searchCompletion: MKLocalSearchCompletion, completionHandler: @escaping () -> Void) {
         getLocationCoordinates(searchCompletion: searchCompletion) { coordinate in
             if let coordinate {
-                self.selectedLocationCoordinate = coordinate
+                self.selectedUberLocation = UberLocation(title: searchCompletion.title, coordinate: coordinate)
                 completionHandler()
             }
         }
@@ -60,7 +60,7 @@ final class LocationSearchViewModel: NSObject, ObservableObject {
     }
     
     func computeRidePrice(for type: RideType) -> Double {
-        guard let destinationCoordinate = selectedLocationCoordinate else { return 0.0 }
+        guard let destinationCoordinate = selectedUberLocation?.coordinate else { return 0.0 }
         guard let userCoordinate = userLocation else { return 0.0 }
         
         let destination = CLLocation(latitude: destinationCoordinate.latitude, longitude: destinationCoordinate.longitude)

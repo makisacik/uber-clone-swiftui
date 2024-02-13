@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapViewActionButton: View {
     @Binding var mapState: UberMapViewState
-    
+     
     var body: some View {
         Button {
             withAnimation(.spring()) {
