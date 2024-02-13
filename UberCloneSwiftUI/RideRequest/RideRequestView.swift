@@ -10,11 +10,7 @@ import SwiftUI
 struct RideRequestView: View {
     
     @State private var selectedRideType: RideType = .uberX
-    
-    @Binding var uberXPrice: String
-    @Binding var uberBlackPrice: String
-    @Binding var uberXLPrice: String
-
+    @EnvironmentObject var locationViewModel: LocationSearchViewModel
     var body: some View {
         VStack {
             Capsule()
@@ -67,7 +63,7 @@ struct RideRequestView: View {
                 HStack(spacing: 12) {
                     ForEach(RideType.allCases) {type in
                         VStack(alignment: .center) {
-
+                            
                             if (type == .uberXL) {
                                 Image(type.imageName)
                                     .resizable()
@@ -81,9 +77,11 @@ struct RideRequestView: View {
                             
                             Text(type.description)
                                 .fontWeight(.semibold)
-                            TextField("Value", text: $uberXPrice)
+                            Text(String(format: "$%.1f", locationViewModel.computeRidePrice(for: type)))
                                 .multilineTextAlignment(.center)
                                 .fontWeight(.semibold)
+
+
                             Spacer()
                         }
                         .frame(width: 112)
@@ -155,6 +153,6 @@ struct RideRequestView: View {
 
 struct RideRequestView_Previews: PreviewProvider {
     static var previews: some View {
-        RideRequestView(uberXPrice: .constant("$22.4"), uberBlackPrice: .constant("$26.3"), uberXLPrice: .constant("$30.5"))
+        RideRequestView()
     }
 }
