@@ -40,6 +40,10 @@ struct HomeView: View {
             }
             
         }.ignoresSafeArea(edges: .bottom)
+        .onReceive(LocationManager.shared.$userLocationCoordinate,
+                   perform: { coordinate in
+            debugPrint("DEBUG Location \(String(describing: coordinate))")
+        })
     }
 }
 
