@@ -90,9 +90,7 @@ struct RideRequestView: View {
                         .scaleEffect(getRideTypeSelectedScale(type: type))
                         .cornerRadius(10)
                         .onTapGesture {
-                            withAnimation(.spring()) {
-                                selectedRideType = type
-                            }
+                            selectedRideType = type
                         }
                     }
                 }
