@@ -34,12 +34,17 @@ struct HomeView: View {
                     .padding(.top, 4)
             }
             
-            if mapState == .locationSelected || mapState == .polylineAdded {
-                RideRequestView()
-                    .transition(.move(edge: .bottom))
-            }
+            let shouldShowRideRequest = mapState == .locationSelected || mapState == .polylineAdded
             
+            VStack {
+                if shouldShowRideRequest {
+                        RideRequestView()
+                            .transition(.move(edge: .bottom))
+                }
+            }
+            .animation(.spring, value: shouldShowRideRequest)
         }.ignoresSafeArea(edges: .bottom)
+        
         .onReceive(LocationManager.shared.$userLocation,
                    perform: { location in
             debugPrint("DEBUG Location \(String(describing: location))")

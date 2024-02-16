@@ -30,6 +30,7 @@ struct LocationSearchView: View {
                     TextField("Current Location", text: $startLocationText)
                         .frame(height: 32)
                         .background(Color(.systemGroupedBackground))
+                        .disabled(true)
                     
                     TextField("Where to ?", text: $viewModel.queryFragment)
                         .frame(height: 32)
